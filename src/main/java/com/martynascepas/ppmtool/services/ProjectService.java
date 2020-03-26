@@ -1,6 +1,7 @@
 package com.martynascepas.ppmtool.services;
 
 import com.martynascepas.ppmtool.domain.Project;
+import com.martynascepas.ppmtool.exceptions.ProjectIdException;
 import com.martynascepas.ppmtool.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,12 @@ public class ProjectService {
 
     public Project saveOrUpdateProject(Project project){
 
-        //Logic
+        try {
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            return projectRepository.save(project);
+        }catch (Exception e){
+            throw new ProjectIdException("Project ID '" + project.getProjectIdentifier().toUpperCase()+"' already exists.");
+        }
 
-        return projectRepository.save(project);
     }
 }
