@@ -1,7 +1,5 @@
 package com.martynascepas.ppmtool.domain;
 
-
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
